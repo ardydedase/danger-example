@@ -1,0 +1,10 @@
+{
+  "name": "danger-example",
+  "version": "1.0.0",
+  "description": "Danger JS example",
+  "author": "Ardy Dedase",
+  "license": "ISC",
+  "devDependencies": {
+    "danger": "^11.0.5"
+  }
+}
