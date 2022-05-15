@@ -5,11 +5,11 @@ const reviewLargePR = () => {
         warn(`:exclamation: Pull Request size seems relatively large. If Pull Request contains multiple changes, split each into separate PR for faster, easier review.`);
     }
 }
-const ensureAssignees = () => {
+const ensurePRHasAssignee = () => {
     // Always ensure we assign someone, so that our Slackbot can do its work correctly
     if (danger.github.pr.assignee === null) {
     fail("Please assign someone to merge this PR, and optionally include people who should review.")
   }
 }
 reviewLargePR();
-ensureAssignees();
+ensurePRHasAssignee();

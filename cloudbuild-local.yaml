@@ -1,0 +1,19 @@
+# Meant to be used locally for testing.
+steps:
+  - name: node:16
+    env:
+      - 'DANGER_MANUAL_CI=CloudBuild'
+      - 'DANGER_MANUAL_GH_REPO=ardydedase/danger-example'
+      # TODO: Replace with your own GitHub token
+      # - 'DANGER_GITHUB_API_TOKEN=<REPLACE_WITH_YOUR_GH_TOKEN>'
+    args:
+      - '-c'
+      - |
+        echo "Running Danger build..."
+        npm install
+        # PR number is hardcoded for local testing
+        DANGER_MANUAL_PR_NUM=1 node_modules/danger/distribution/commands/danger-ci.js
+    id: danger-code-review
+    waitFor:
+      - '-'
+    entrypoint: bash

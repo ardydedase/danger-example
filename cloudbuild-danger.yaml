@@ -1,0 +1,23 @@
+steps:
+  - name: node:16
+    env:
+      - 'DANGER_MANUAL_CI=CloudBuild'
+      - 'DANGER_MANUAL_GH_REPO=ardydedase/danger-example'
+    args:
+      - '-c'
+      - |
+        echo "Running Danger build..."
+        npm install
+        # PR number is hardcoded for local testing
+        DANGER_MANUAL_PR_NUM=$_PR_NUMBER node_modules/danger/distribution/commands/danger-ci.js
+    id: danger-code-review
+    waitFor:
+      - '-'
+    entrypoint: bash
+    secretEnv:
+      - DANGER_GITHUB_API_TOKEN  
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/<my-github-token-secret>/versions/1
+      env: DANGER_GITHUB_API_TOKEN
